@@ -1,0 +1,5 @@
+# Files and folders ingored by Git
+.idea/
+_assets/
+.sass-cache/*
+scss/
