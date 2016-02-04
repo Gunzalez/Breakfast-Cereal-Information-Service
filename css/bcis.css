@@ -103,13 +103,17 @@ body {
 }
 .main-navigation li {
   float: left;
+  background: url("../images/bg-menu-divider.png") bottom left no-repeat;
+}
+.main-navigation li:nth-child(1) {
+  background: none;
 }
 .main-navigation a {
   display: block;
   text-transform: uppercase;
   font-family: "osp-dindin";
   font-size: 2.0em;
-  color: #1d57b5;
+  color: #1b57b7;
   padding: 5px 10px;
   line-height: 100%;
   text-decoration: none;
@@ -266,6 +270,34 @@ body {
 .facts-list li .fact p {
   line-height: 150%;
   font-weight: bold;
+}
+
+.footer-navigation {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  float: left;
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+.footer-navigation li {
+  float: left;
+  background: url("../images/bg-menu-divider-reversed.png") 0 -5px no-repeat;
+}
+.footer-navigation li:nth-child(1) {
+  background: none;
+}
+.footer-navigation a {
+  color: #1b57b7;
+  font-size: 0.9em;
+  font-weight: bold;
+  padding: 10px;
+  display: block;
+  text-decoration: none;
+}
+.footer-navigation a:hover {
+  text-decoration: underline;
 }
 
 #menu a {
