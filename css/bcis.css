@@ -45,14 +45,26 @@ body {
 }
 
 .page {
-  background: url("../images/bg-header-small.png") -30px -30px no-repeat #f7da04;
+  background: url("../images/bg-starburst.png") -187px -165px no-repeat #f7da04;
   max-width: 988px;
   margin: 0 auto;
 }
+@media (min-width: 768px) {
+  .page {
+    background: url("../images/bg-starburst.png") -178px -158px no-repeat #f7da04;
+  }
+}
 @media (min-width: 997px) {
   .page {
+    background: url("../images/bg-starburst.png") -168px -158px no-repeat #f7da04;
     padding: 0 10px;
     max-width: 1008px;
+  }
+}
+@media (min-width: 1170px) {
+  .page {
+    background: url("../images/bg-starburst.png") -100px -220px no-repeat #f7da04;
+    max-width: 988px;
   }
 }
 
@@ -68,6 +80,52 @@ body {
   height: 88px;
   position: relative;
 }
+@media (min-width: 768px) {
+  .header {
+    height: 112px;
+  }
+}
+@media (min-width: 1170px) {
+  .header {
+    height: 73px;
+    margin-top: 90px;
+  }
+}
+
+.main-navigation {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  position: absolute;
+  float: left;
+  bottom: 0;
+  right: 0;
+}
+.main-navigation li {
+  float: left;
+}
+.main-navigation a {
+  display: block;
+  text-transform: uppercase;
+  font-family: "osp-dindin";
+  font-size: 2.0em;
+  color: #1d57b5;
+  padding: 5px 10px;
+  line-height: 100%;
+  text-decoration: none;
+  -webkit-transition: all 0.5s;
+  -moz-transition: all 0.5s;
+  -o-transition: all 0.5s;
+  transition: all 0.5s;
+}
+.main-navigation a:hover {
+  color: #ffffff;
+}
+@media (max-width: 768px) {
+  .main-navigation {
+    display: none;
+  }
+}
 
 .mobile-navigation-button {
   position: absolute;
@@ -80,6 +138,11 @@ body {
 .mobile-navigation-button:hover, .mobile-navigation-button:focus {
   color: #ffffff;
 }
+@media (min-width: 769px) {
+  .mobile-navigation-button {
+    display: none;
+  }
+}
 
 .logo {
   position: absolute;
@@ -88,9 +151,26 @@ body {
 }
 .logo a {
   display: block;
-  background: url("../images/logo-small.png") 0 0 no-repeat transparent;
+  background: url("../images/logo.png") 0 0 no-repeat transparent;
   width: 80px;
   height: 74px;
+  background-size: cover;
+}
+@media (min-width: 768px) {
+  .logo {
+    top: 14px;
+    left: 18px;
+  }
+}
+@media (min-width: 1170px) {
+  .logo {
+    top: -75px;
+    left: 57px;
+  }
+  .logo a {
+    width: 146px;
+    height: 135px;
+  }
 }
 
 .carousel {

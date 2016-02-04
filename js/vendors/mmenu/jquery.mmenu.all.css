@@ -334,7 +334,8 @@ html.mm-blocking {
     overflow: hidden; }
 
 html.mm-background .mm-page {
-  background: inherit; }
+  /*background: inherit; */
+}
 
 #mm-blocker {
   background: rgba(3, 2, 1, 0);
