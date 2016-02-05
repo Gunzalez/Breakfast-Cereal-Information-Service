@@ -167,10 +167,7 @@
             $("#menu").mmenu({
                 "extensions": [
                     "pageshadow",
-                    //"theme-dark",
-                    "pagedim",
-                    "effect-menu-slide",
-                    "effect-listitems-slide"
+                    "pagedim"
                 ],
                 "offCanvas": {
                     "position": "right"
