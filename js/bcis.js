@@ -172,8 +172,18 @@
                 "offCanvas": {
                     "position": "right"
                 }
-                //,"slidingSubmenus": false
             });
+        }
+    };
+
+    bcis.quickSelect = {
+
+        $html: $('#quick-select'),
+
+        init: function(){
+            this.$html.on('change', function(){
+                window.location.assign($(this).val());
+            })
         }
     };
 
@@ -183,6 +193,7 @@
         bcis.environment.init();
         bcis.mobileNav.init();
         bcis.carousel.init();
+        bcis.quickSelect.init();
 
         // resize triggers
         $(window).on('resize', function () {
