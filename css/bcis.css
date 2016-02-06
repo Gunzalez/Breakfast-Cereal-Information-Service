@@ -238,6 +238,9 @@ body {
 .hero .imagery.responses {
   background: url("../images/bg-hero-responses.png") top center no-repeat;
 }
+.hero .imagery.members {
+  background: url("../images/bg-hero-members.png") top center no-repeat;
+}
 @media (min-width: 768px) {
   .hero .imagery {
     height: 212px;
