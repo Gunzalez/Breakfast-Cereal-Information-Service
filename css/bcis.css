@@ -123,7 +123,7 @@ body {
   text-transform: uppercase;
   font-family: "osp-dindin";
   font-size: 2.0em;
-  color: #1b57b7;
+  color: #1d57b5;
   padding: 5px 10px;
   line-height: 100%;
   text-decoration: none;
@@ -221,6 +221,11 @@ body {
   padding-bottom: 10px;
   font-weight: bold;
 }
+@media (max-width: 480px) {
+  .copy.responsive-imagery img {
+    width: 100%;
+  }
+}
 
 .container {
   padding: 0 10px;
@@ -258,29 +263,35 @@ body {
 }
 
 ul.news-list,
-ul.responses-list {
+ul.responses-list,
+ul.members-list {
   margin: 0;
   padding: 0;
   list-style: none;
 }
 ul.news-list li,
-ul.responses-list li {
+ul.responses-list li,
+ul.members-list li {
   padding-bottom: 5px;
   font-weight: normal;
 }
 ul.news-list span,
-ul.responses-list span {
+ul.responses-list span,
+ul.members-list span {
   display: block;
 }
 ul.news-list .title,
 ul.news-list .date,
 ul.responses-list .title,
-ul.responses-list .date {
+ul.responses-list .date,
+ul.members-list .title,
+ul.members-list .date {
   color: #2e4d6c;
   font-weight: bold;
 }
 ul.news-list .sub-title,
-ul.responses-list .sub-title {
+ul.responses-list .sub-title,
+ul.members-list .sub-title {
   color: #444444;
 }
 
@@ -298,6 +309,44 @@ ul.responses-list .sub-title {
 }
 @media (max-width: 767px) {
   .responses-list {
+    display: none;
+  }
+}
+
+ul.members-list a {
+  display: block;
+}
+ul.members-list a:hover .title {
+  color: #2e4d6c;
+}
+ul.members-list li {
+  clear: left;
+  float: left;
+  padding: 10px 0;
+  border-bottom: 1px solid #eaeaea;
+  width: 100%;
+}
+ul.members-list li:nth-last-child(1) {
+  border: none;
+}
+ul.members-list img {
+  max-width: 140px;
+  float: left;
+  margin-bottom: 10px;
+}
+@media (max-width: 767px) {
+  ul.members-list img {
+    display: none;
+  }
+}
+ul.members-list .title {
+  margin-left: 160px;
+  padding-bottom: 20px;
+  background: url("../images/bg-right-arrow.png") bottom left no-repeat transparent;
+  color: #1d57b5;
+}
+@media (max-width: 767px) {
+  ul.members-list {
     display: none;
   }
 }
@@ -389,8 +438,8 @@ ul.responses-list .sub-title {
 }
 
 .footer {
-  background: url("../images/bg-footer-small.png") bottom right no-repeat #f7da04;
-  height: 51px;
+  background: url("../images/bg-starburst-half.png") right -190px no-repeat #f7da04;
+  height: 60px;
   position: relative;
   box-shadow: inset 0px 3px 3px 0px rgba(0, 0, 0, 0.18);
 }
@@ -399,9 +448,14 @@ ul.responses-list .sub-title {
   top: 8px;
   right: 12px;
   color: #ffffff;
-  font-size: 2.8em;
+  font-size: 2.6em;
   margin: 0;
   padding: 0;
+}
+@media (min-width: 768px) {
+  .footer {
+    height: 90px;
+  }
 }
 
 .footer-navigation {
@@ -421,7 +475,7 @@ ul.responses-list .sub-title {
   background: none;
 }
 .footer-navigation a {
-  color: #1b57b7;
+  color: #1d57b5;
   font-size: 0.9em;
   font-weight: bold;
   padding: 10px;
