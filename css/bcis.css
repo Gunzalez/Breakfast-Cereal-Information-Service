@@ -391,31 +391,58 @@ ul.members-list .title {
 }
 
 .facts-list {
-  margin: 0;
-  padding: 0;
-  list-style: none;
-  width: 100%;
+  max-width: 309px;
   height: 205px;
-  background: #558CC5;
   margin-bottom: 20px;
-}
-.facts-list li {
-  width: 100%;
-  height: 100%;
-  display: table;
-  text-align: center;
+  position: relative;
 }
 .facts-list .fact {
+  width: 100%;
+  height: 205px;
+  display: table;
+  text-align: center;
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  opacity: 0;
+  z-index: 1;
+  -webkit-transition: all 0.5s;
+  -moz-transition: all 0.5s;
+  -o-transition: all 0.5s;
+  transition: all 0.5s;
+}
+.facts-list .fact.active {
+  opacity: 1;
+  z-index: 2;
+}
+.facts-list .content {
   display: table-cell;
   text-align: center;
   vertical-align: middle;
 }
-.facts-list .fact p {
+.facts-list .content p {
   line-height: 150%;
   font-weight: bold;
 }
-.facts-list .fact-bg-1 {
-  background: url("../images/bg-fact.png") 50% 50% no-repeat;
+.facts-list .control {
+  position: absolute;
+  top: 50%;
+  width: 40px;
+  height: 40px;
+  text-indent: -9000px;
+  margin-top: -20px;
+  z-index: 3;
+  outline: none;
+  text-decoration: none;
+}
+.facts-list .control.previous {
+  background: url("../images/bg-left-arrow.png") 50% 50% no-repeat transparent;
+  left: 0;
+}
+.facts-list .control.next {
+  background: url("../images/bg-right-arrow.png") 50% 50% no-repeat transparent;
+  right: 0;
 }
 
 .header-link {

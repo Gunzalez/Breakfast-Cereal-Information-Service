@@ -162,7 +162,7 @@
     };
 
     bcis.mobileNav = {
-
+        // implements jquery mmenu plugin
         init: function () {
             $("#menu").mmenu({
                 "extensions": [
@@ -177,12 +177,47 @@
     };
 
     bcis.quickSelect = {
-
         $html: $('#quick-select'),
 
         init: function(){
             this.$html.on('change', function(){
                 window.location.assign($(this).val());
+            })
+        }
+    };
+
+    bcis.facts = {
+        $html: $('.facts-list'),
+        $controls: $('.control', this.$html),
+        $facts: $('.fact', this.$html),
+
+        init: function(){
+            var self = this;
+            this.$controls.on('click', function(event){
+                event.preventDefault();
+
+                var $curActiveFact = $('.active', self.$html),
+                    curIndex = self.$facts.index($curActiveFact);
+
+                self.$facts.removeClass('active');
+                if($(this).hasClass('next')){
+
+                    curIndex++;
+                    if(curIndex == self.$facts.length){
+                        curIndex = 0
+                    }
+                    self.$facts.eq(curIndex).addClass('active');
+
+                } else {
+
+                    curIndex--;
+                    if(curIndex < 0){
+                        curIndex = (self.$facts.length-1)
+                    }
+                    self.$facts.eq(curIndex).addClass('active');
+                }
+
+
             })
         }
     };
@@ -194,6 +229,7 @@
         bcis.mobileNav.init();
         bcis.carousel.init();
         bcis.quickSelect.init();
+        bcis.facts.init();
 
         // resize triggers
         $(window).on('resize', function () {
