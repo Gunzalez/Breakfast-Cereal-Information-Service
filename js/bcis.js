@@ -25,6 +25,15 @@
                     }
                 });
             });
+        },
+        whatIE: function(){
+
+            var undefined = undefined, v = 3,
+                div = document.createElement('div'),
+                all = div.getElementsByTagName('i');
+
+            while ( div.innerHTML = '<!--[if gt IE ' + (++v) + ']><i></i><![endif]-->', all[0] );
+            return v > 4 ? v : undefined;
         }
     };
 
@@ -84,8 +93,9 @@
         },
 
         // actual slide effect on list items, by changing list left margin
-        slide: function(direction){
-            var oldLeftMargin = parseInt(this.$slider.css('margin-left').replace('px','')),
+        slide: function(dir){
+            var direction = dir,
+                oldLeftMargin = parseInt(this.$slider.css('margin-left').replace('px','')),
                 newLeftMargin;
 
             this.$slider.addClass('animated');
@@ -97,6 +107,11 @@
                 this.$slidePos--;
             }
             this.$slider.css('margin-left', newLeftMargin);
+
+            if( bcis.utils.whatIE() <= 9 ){
+                this.updateNavButtons();
+                this.isBusy = false;
+            }
         },
 
         init: function(){
@@ -193,6 +208,11 @@
                 newLeftMargin = '0px';
             }
             this.$slider.css('margin-left', newLeftMargin);
+
+            if( bcis.utils.whatIE() <= 9 ){
+                this.updateNavButtons();
+                this.isBusy = false;
+            }
         }
     };
 

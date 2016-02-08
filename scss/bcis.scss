@@ -154,10 +154,16 @@ body {
     font-size: 2.5em;
     color: #ffffff;
     line-height: 100%;
+    outline: none;
+
+    i {
+        outline: none;
+    }
 
     &:hover,
     &:focus {
         color: #ffffff;
+        outline: none;
     }
 
     @media (min-width: 769px) {
@@ -225,6 +231,7 @@ body {
                 border-radius: 50%;
                 @include transitions(0.5s);
                 border: 1px solid #999999;
+                outline: none;
             }
 
             &:hover,
@@ -244,6 +251,7 @@ body {
             height: 14px;
             background-position: 50% 50%;
             background-repeat: no-repeat;
+            outline: none;
         }
 
         .slide-left {

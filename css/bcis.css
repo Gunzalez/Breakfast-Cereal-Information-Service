@@ -160,9 +160,14 @@ body {
   font-size: 2.5em;
   color: #ffffff;
   line-height: 100%;
+  outline: none;
+}
+.mobile-navigation-button i {
+  outline: none;
 }
 .mobile-navigation-button:hover, .mobile-navigation-button:focus {
   color: #ffffff;
+  outline: none;
 }
 @media (min-width: 769px) {
   .mobile-navigation-button {
@@ -239,6 +244,7 @@ body {
   -o-transition: all 0.5s;
   transition: all 0.5s;
   border: 1px solid #999999;
+  outline: none;
 }
 .carousel .carousel-navigation li:hover a, .carousel .carousel-navigation li.active a {
   background: #2e4d6c;
@@ -252,6 +258,7 @@ body {
   height: 14px;
   background-position: 50% 50%;
   background-repeat: no-repeat;
+  outline: none;
 }
 .carousel .carousel-navigation .slide-left {
   background-image: url("../images/bg-arrow-left-blue.png");

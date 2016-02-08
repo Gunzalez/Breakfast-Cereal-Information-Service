@@ -2,3 +2,4 @@
 .idea/
 _assets/
 .sass-cache/*
+scss/.sass-cache/*
