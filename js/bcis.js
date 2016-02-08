@@ -38,7 +38,7 @@
         },
 
         resize: function () {
-            bcis.carousel.resize();
+            bcis.carousel.resize({ "animate" : false });;
 
         },
 
@@ -61,15 +61,17 @@
 
     bcis.carousel = {
         $html: $('.carousel'),
-        $slider: $('#slider', this.$html),
-        $controls: $('.slide-btn', this.$html),
+        $sliderContainer: $('.slider-container', this.$html),
+        $slider: $('.slider', this.$sliderContainer),
+        $controls: $('.carousel .control', this.$html),
         slidesCount: $('.slide', this.$slider).length,
-        $dots: $('.dots', this.$html),
-        $banners: $('.shout-out', this.$html),
+        $pagination: $('<ul class="dots" />'),
+        isBusy: false,
         $slidePos: 0,
 
+        // updates pagination and arrows
         updateNavButtons: function(){
-            $('.dot', this.$dots).eq(this.$slidePos).addClass('active').siblings().removeClass('active');
+            $('li', this.$pagination).eq(this.$slidePos).addClass('active').siblings().removeClass('active');
             $('.slide', this.$slider).eq(this.$slidePos).addClass('active').siblings().removeClass('active');
 
             this.$controls.removeClass('disabled');
@@ -81,16 +83,17 @@
             }
         },
 
+        // actual slide effect on list items, by changing list left margin
         slide: function(direction){
             var oldLeftMargin = parseInt(this.$slider.css('margin-left').replace('px','')),
                 newLeftMargin;
 
             this.$slider.addClass('animated');
             if(direction == 'right'){
-                newLeftMargin = oldLeftMargin - $(window).width();
+                newLeftMargin = oldLeftMargin - this.$sliderContainer.width();
                 this.$slidePos++;
             } else {
-                newLeftMargin = oldLeftMargin + $(window).width();
+                newLeftMargin = oldLeftMargin + this.$sliderContainer.width();
                 this.$slidePos--;
             }
             this.$slider.css('margin-left', newLeftMargin);
@@ -99,25 +102,55 @@
         init: function(){
             var carousel = this;
 
+            // creates dot pagination
+            for(var i=0; i<carousel.slidesCount; i++){
+                carousel.$pagination.append($('<li><a href="#"></a></li>'));
+            }
+            $('.dots', carousel.$html).replaceWith(carousel.$pagination);
+
+            // attaches pagination quick jump functionality
+            $('a', carousel.$pagination).each(function(i, obj){
+                $(obj).on('click', function(event){
+                    event.preventDefault();
+                    if(!carousel.isBusy){
+                        if(!$(this).parent('li').hasClass('active')){
+                            carousel.isBusy = true;
+                            carousel.$slidePos = $('a',carousel.$pagination).index(this);
+                            carousel.resize({ "animate" : true });
+                        }
+                    }
+                })
+            });
+
+            // attaches left/right navigation functionality
             carousel.$controls.on('click', function(evt){
                 evt.preventDefault();
 
-                if($(this).hasClass('slide-right')){
-                    if(carousel.$slidePos < (carousel.slidesCount-1)){
-                        carousel.slide('right');
-                    }
-                } else {
-                    if(carousel.$slidePos > 0){
-                        carousel.slide('left');
+                if(!carousel.isBusy){
+                    if(!$(this).hasClass('disabled')){
+                        if($(this).hasClass('slide-right')){
+                            if(carousel.$slidePos < (carousel.slidesCount-1)){
+                                carousel.isBusy = true;
+                                carousel.slide('right');
+                            }
+                        } else {
+                            if(carousel.$slidePos > 0){
+                                carousel.isBusy = true;
+                                carousel.slide('left');
+                            }
+                        }
                     }
                 }
             });
 
+            // listening out for CSS transition end
             carousel.$slider.on("webkitTransitionEnd otransitionend oTransitionEnd msTransitionEnd transitionend", function() {
                 carousel.updateNavButtons();
+                carousel.isBusy = false;
             });
 
-            carousel.$html.swipe({
+            // implements jQuery swipe plugin
+            carousel.$sliderContainer.swipe({
                 swipe:function(event, direction) {
                     if(direction == 'right'){
                         $('.slide-left', carousel.$html).trigger('click');
@@ -126,20 +159,33 @@
                         $('.slide-right', carousel.$html).trigger('click');
                     }
                 },
-                threshold: 0
+                threshold: 75
             });
 
+            // left arrow disabled at start
             carousel.$controls.eq(0).addClass('disabled');
+
+            // first list item set to active
             $('.slide', carousel.$slider).eq(0).addClass('active');
-            carousel.resize();
         },
 
-        resize: function(){
-            this.$slider.removeClass('animated');
-            this.$slider.width($(window).width() * this.slidesCount).removeClass('hidden');
-            $('.slide', this.$slider).width($(window).width());
-            $('li', this.$dots).eq(this.$slidePos).addClass('active');
+        // perform checks and any readjustments on page width change
+        resize: function(options){
+            var curSliderWidth = this.$sliderContainer.width();
+            if(options.animate){
+                this.$slider.addClass('animated');
+            } else {
+                this.$slider.removeClass('animated');
+            }
 
+            // adjust list width, and list item width
+            this.$slider.width(curSliderWidth * this.slidesCount).removeClass('hidden');
+            $('.slide', this.$slider).width(curSliderWidth);
+
+            // adjust dot pagination according to slide position
+            $('li', this.$pagination).eq(this.$slidePos).addClass('active').siblings().removeClass('active');
+
+            // adjust left margin depending on slide position
             var newLeftMargin;
             if(this.$slidePos != 0 ){
                 newLeftMargin = '-' + (this.$html.width() * parseInt(this.$slidePos)) + 'px';
@@ -147,17 +193,6 @@
                 newLeftMargin = '0px';
             }
             this.$slider.css('margin-left', newLeftMargin);
-
-            // positioning controls
-            if ($(window).width() < bcis.properties.maxWidth ){
-                $('.left-control').css('left', 0);
-                $('.right-control').css('right', 0);
-                this.$banners.css('left', 0);
-            } else {
-                $('.left-control').css('left', ($(window).width() - bcis.properties.maxWidth)/2);
-                this.$banners.css('left', ($(window).width() - bcis.properties.maxWidth)/2);
-                $('.right-control').css('right', ($(window).width() - bcis.properties.maxWidth)/2);
-            }
         }
     };
 
@@ -188,11 +223,12 @@
 
     bcis.facts = {
         $html: $('.facts-list'),
-        $controls: $('.control', this.$html),
+        $controls: $('.facts-list .control', this.$html),
         $facts: $('.fact', this.$html),
 
         init: function(){
             var self = this;
+
             this.$controls.on('click', function(event){
                 event.preventDefault();
 

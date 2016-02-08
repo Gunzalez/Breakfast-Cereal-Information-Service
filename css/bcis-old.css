@@ -44,13 +44,6 @@ h4, h5, h6 {
   font-weight: bold;
 }
 
-.loud {
-  font-weight: bold;
-}
-.loud * {
-  font-weight: bold;
-}
-
 body {
   background-color: #ffffff;
   font-size: small;
@@ -85,17 +78,25 @@ body {
   }
 }
 
-@media (max-width: 479px) {
-  .col-xxs-12 {
-    width: 100%;
-  }
-}
 .section.carousel {
   background: #ffffff;
 }
 .section.content {
   padding: 10px 0;
   background: #ffffff;
+}
+.section .slider ul {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  height: 185px;
+}
+.section .slider .slide-1 {
+  display: block;
+  width: 100%;
+  height: 185px;
+  background: url("../images/slide-img-1-small.jpg") right top no-repeat transparent;
+  background-size: auto;
 }
 
 .header {
@@ -203,161 +204,9 @@ body {
 .carousel {
   padding: 10px;
   border-bottom: 10px solid #f7da04;
-  content: "";
-  clear: both;
-  display: block;
-  overflow: auto;
 }
-.carousel .carousel-navigation {
-  content: "";
-  clear: both;
-  display: block;
-  overflow: auto;
-  padding-bottom: 10px;
-}
-.carousel .carousel-navigation .control-pad {
-  float: right;
-}
-.carousel .carousel-navigation ul {
-  float: left;
-  margin: 0;
-  padding: 0;
-  list-style: none;
-}
-.carousel .carousel-navigation li {
-  float: left;
-  padding: 0 3px;
-}
-.carousel .carousel-navigation li a {
-  background: #cccccc;
-  display: block;
-  width: 14px;
-  height: 14px;
-  border-radius: 50%;
-  -webkit-transition: all 0.5s;
-  -moz-transition: all 0.5s;
-  -o-transition: all 0.5s;
-  transition: all 0.5s;
-  border: 1px solid #999999;
-}
-.carousel .carousel-navigation li:hover a, .carousel .carousel-navigation li.active a {
-  background: #2e4d6c;
-  border: 1px solid #2e4d6c;
-}
-.carousel .carousel-navigation .control {
-  float: left;
-  display: block;
-  text-indent: -9000px;
-  width: 30px;
-  height: 14px;
-  background-position: 50% 50%;
-  background-repeat: no-repeat;
-}
-.carousel .carousel-navigation .slide-left {
-  background-image: url("../images/bg-arrow-left-blue.png");
-}
-.carousel .carousel-navigation .slide-left.disabled {
-  background-image: url("../images/bg-arrow-left-blue-disabled.png");
-  cursor: default;
-}
-.carousel .carousel-navigation .slide-right {
-  background-image: url("../images/bg-arrow-right-blue.png");
-}
-.carousel .carousel-navigation .slide-right.disabled {
-  background-image: url("../images/bg-arrow-right-blue-disabled.png");
-  cursor: default;
-}
-@media (min-width: 747px) {
-  .carousel .carousel-navigation {
-    z-index: 6;
-    position: absolute;
-    bottom: 20px;
-    left: 20px;
-  }
-}
-.carousel .slider-container {
-  position: relative;
-  overflow: hidden;
-}
-.carousel .slider-container .slider {
-  margin: 0;
-  padding: 0;
-  list-style: none;
-  float: left;
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 0;
-}
-.carousel .slider-container .slider .slide {
-  width: 0;
-  text-align: right;
-  float: left;
-  position: relative;
-}
-.carousel .slider-container .slide-title {
-  position: absolute;
-  top: 10px;
-  left: 10px;
-  margin: 0;
-  z-index: 5;
-}
-.carousel .slider-container .slide-title a {
-  font-size: 1.1em;
-  text-transform: uppercase;
-  border: none;
-  color: #ffffff;
-  text-shadow: 0px 0px 5px rgba(100, 100, 100, 0.85);
-  text-decoration: none;
-}
-@media (min-width: 480px) {
-  .carousel .slider-container .slide-title {
-    top: 30px;
-    left: 20px;
-  }
-  .carousel .slider-container .slide-title a {
-    font-size: 1.6em;
-  }
-}
-@media (min-width: 747px) {
-  .carousel .slider-container .slide-title a {
-    font-size: 2.0em;
-    color: #1d57b5;
-    text-shadow: none;
-  }
-}
-.carousel .slider-container .copy {
-  position: absolute;
-  top: 0;
-  left: 0;
-  bottom: 0;
-  width: 422px;
-  background: white;
-  background: rgba(255, 255, 255, 0.9);
-  text-align: left;
-  padding: 85px 40px 20px 20px;
-  color: #000000;
-  z-index: 4;
-}
-@media (max-width: 746px) {
-  .carousel .slider-container .copy {
-    display: none;
-  }
-}
-.carousel .slider-container img {
+.carousel img {
   width: 100%;
-}
-@media (min-width: 746px) {
-  .carousel .slider-container img {
-    width: auto;
-    height: 362px;
-  }
-}
-.carousel .slider-container .animated {
-  -webkit-transition: all 0.5s;
-  -moz-transition: all 0.5s;
-  -o-transition: all 0.5s;
-  transition: all 0.5s;
 }
 
 .copy {
@@ -382,7 +231,8 @@ body {
   margin: 10px 0;
 }
 .copy ul li {
-  padding-bottom: 7px;
+  padding-bottom: 10px;
+  font-weight: bold;
 }
 @media (max-width: 480px) {
   .copy.responsive-imagery img {
@@ -554,7 +404,7 @@ ul.members-list .title {
 }
 
 .facts-list {
-  max-width: 480px;
+  max-width: 352px;
   height: 205px;
   margin-bottom: 20px;
   position: relative;
