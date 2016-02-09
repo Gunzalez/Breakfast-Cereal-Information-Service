@@ -73,21 +73,25 @@
         $sliderContainer: $('.slider-container', this.$html),
         $slider: $('.slider', this.$sliderContainer),
         $controls: $('.carousel .control', this.$html),
-        slidesCount: $('.slide', this.$slider).length,
         $pagination: $('<ul class="dots" />'),
+        slidesCount: $('.slide', this.$slider).length,
         isBusy: false,
-        $slidePos: 0,
+        slidePos: 0,
+        autoStart: true,
+        autoDelay: 7,
+        autoTimer: undefined,
+
 
         // updates pagination and arrows
         updateNavButtons: function(){
-            $('li', this.$pagination).eq(this.$slidePos).addClass('active').siblings().removeClass('active');
-            $('.slide', this.$slider).eq(this.$slidePos).addClass('active').siblings().removeClass('active');
+            $('li', this.$pagination).eq(this.slidePos).addClass('active').siblings().removeClass('active');
+            $('.slide', this.$slider).eq(this.slidePos).addClass('active').siblings().removeClass('active');
 
             this.$controls.removeClass('disabled');
-            if(this.$slidePos == 0 ){
+            if(this.slidePos == 0 ){
                 this.$controls.eq(0).addClass('disabled');
             }
-            if(this.$slidePos == (this.slidesCount-1)){
+            if(this.slidePos == (this.slidesCount-1)){
                 this.$controls.eq(1).addClass('disabled');
             }
         },
@@ -101,10 +105,10 @@
             this.$slider.addClass('animated');
             if(direction == 'right'){
                 newLeftMargin = oldLeftMargin - this.$sliderContainer.width();
-                this.$slidePos++;
+                this.slidePos++;
             } else {
                 newLeftMargin = oldLeftMargin + this.$sliderContainer.width();
-                this.$slidePos--;
+                this.slidePos--;
             }
             this.$slider.css('margin-left', newLeftMargin);
 
@@ -129,8 +133,9 @@
                     event.preventDefault();
                     if(!carousel.isBusy){
                         if(!$(this).parent('li').hasClass('active')){
+                            clearInterval(carousel.autoTimer);
                             carousel.isBusy = true;
-                            carousel.$slidePos = $('a',carousel.$pagination).index(this);
+                            carousel.slidePos = $('a', carousel.$pagination).index(this);
                             carousel.resize({ "animate" : true });
                         }
                     }
@@ -143,13 +148,14 @@
 
                 if(!carousel.isBusy){
                     if(!$(this).hasClass('disabled')){
+                        clearInterval(carousel.autoTimer);
                         if($(this).hasClass('slide-right')){
-                            if(carousel.$slidePos < (carousel.slidesCount-1)){
+                            if(carousel.slidePos < (carousel.slidesCount-1)){
                                 carousel.isBusy = true;
                                 carousel.slide('right');
                             }
                         } else {
-                            if(carousel.$slidePos > 0){
+                            if(carousel.slidePos > 0){
                                 carousel.isBusy = true;
                                 carousel.slide('left');
                             }
@@ -182,6 +188,20 @@
 
             // first list item set to active
             $('.slide', carousel.$slider).eq(0).addClass('active');
+
+            if(carousel.autoStart){
+                carousel.autoTimer = setInterval(function(){
+                    if(!carousel.isBusy){
+                        carousel.isBusy = true;
+                        if(carousel.slidePos < (carousel.slidesCount-1)){
+                            carousel.slidePos++;
+                        } else {
+                            carousel.slidePos = 0;
+                        }
+                        carousel.resize({ "animate" : true });
+                    }
+                },(carousel.autoDelay * 1000));
+            }
         },
 
         // perform checks and any readjustments on page width change
@@ -198,12 +218,12 @@
             $('.slide', this.$slider).width(curSliderWidth);
 
             // adjust dot pagination according to slide position
-            $('li', this.$pagination).eq(this.$slidePos).addClass('active').siblings().removeClass('active');
+            $('li', this.$pagination).eq(this.slidePos).addClass('active').siblings().removeClass('active');
 
             // adjust left margin depending on slide position
             var newLeftMargin;
-            if(this.$slidePos != 0 ){
-                newLeftMargin = '-' + (this.$html.width() * parseInt(this.$slidePos)) + 'px';
+            if(this.slidePos != 0 ){
+                newLeftMargin = '-' + (this.$html.width() * parseInt(this.slidePos)) + 'px';
             } else {
                 newLeftMargin = '0px';
             }
